@@ -120,7 +120,9 @@ def create_shp_layer(
     output_ds = driver2.CreateDataSource(output_path)
     output_layer = output_ds.CreateLayer(os.path.splitext(output_name)[0], srs=output_srs)
 
-    # Add fields to store the class label and prediction score
+    # Add fields to store the image name, class label and prediction score
+    image_field = ogr.FieldDefn("image_id", ogr.OFTInteger)
+    output_layer.CreateField(image_field)
     class_field = ogr.FieldDefn("class", ogr.OFTInteger)
     output_layer.CreateField(class_field)
     score_field = ogr.FieldDefn("score", ogr.OFTReal)
@@ -332,6 +334,7 @@ def save_outputs(
             
             # Define the path to the tile and its name (removing the rotation angle)
             tile_path = image_list[idx]
+            image_name = os.path.splitext(os.path.basename(tile_path))[0]
         
             # Read in the raster information
             _, _, geot, tile_srs, proj = read_raster(tile_path)
@@ -386,8 +389,9 @@ def save_outputs(
                         new_feature = ogr.Feature(masks_layer_defn)
                         
                         # Set the attributes of the feature (classification and score)
+                        new_feature.SetField("image_id", image_name)
                         new_feature.SetField("class", int(labels[j]))
-                        new_feature.SetField("score", float(np.around(scores[j]*100, decimals=1)))
+                        new_feature.SetField("score", np.around(scores[j]*100, decimals=1))
                     
                         # Set the geometry of the detection
                         new_feature.SetGeometry(reprojected_geom)
