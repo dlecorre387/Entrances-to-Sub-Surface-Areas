@@ -26,7 +26,7 @@ ESSA was trained on over 3,600 LROC NAC and HiRISE image tiles (around half of w
 
 ### Download the Model Checkpoint
 
-The PyTorch model checkpoint file for ESSA (*ESSA_ResNet50FPN_best_version.pt*) can be downloaded from Zenodo at https://doi.org/10.5281/zenodo.15095750. Instructions on how to load and re-train models using PyTorch model checkpoint files can be found at https://pytorch.org/tutorials/beginner/saving_loading_models.html. Otherwise, see the next section for inferring ESSA on your own LROC NAC 2,048x2,048 tiles.
+The PyTorch model checkpoint file for ESSA (*ESSA_ResNet50FPN_best_version.pt*) can be downloaded from Zenodo at https://doi.org/10.5281/zenodo.15438463. Instructions on how to load and re-train models using PyTorch model checkpoint files can be found at https://pytorch.org/tutorials/beginner/saving_loading_models.html. Otherwise, see the next section for inferring ESSA on your own LROC NAC 2,048x2,048 tiles.
 
 ### Inferring ESSA
 
